@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messaging Interface</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Messages</h2>
+        <div class="message-list">
+            <div class="message-preview">
+                <img src="user1.jpg" alt="User 1" class="user-pic">
+                <div class="message-info">
+                    <p class="user-name">User 1</p>
+                    <p class="message-text">Hey, how are you?</p>
+                </div>
+            </div>
+            <div class="message-preview">
+                <img src="user2.jpg" alt="User 2" class="user-pic">
+                <div class="message-info">
+                    <p class="user-name">User 2</p>
+                    <p class="message-text">Let's catch up soon!</p>
+                </div>
+            </div>
+            <!-- Repeat message-preview for more messages -->
+        </div>
+        <div class="chat-window">
+            <div class="chat-header">
+                <img src="user1.jpg" alt="User 1" class="user-pic">
+                <p class="user-name">User 1</p>
+            </div>
+            <div class="chat-messages">
+                <div class="message">
+                    <p class="message-sender">User 1:</p>
+                    <p class="message-text">Hey, how are you?</p>
+                </div>
+                <div class="message">
+                    <p class="message-sender">You:</p>
+                    <p class="message-text">I'm good, thanks! How about you?</p>
+                </div>
+                <!-- Repeat message for more chat messages -->
+            </div>
+            <div class="message-input">
+                <input type="text" placeholder="Type a message...">
+                <button>Send</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
