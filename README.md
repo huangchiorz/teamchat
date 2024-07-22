@@ -61,6 +61,7 @@ Chat window with message threads
 Text input for new messages
 Attachments support (images, files)
 Read receipts
+<img width="1472" alt="image" src="https://github.com/user-attachments/assets/ccb4ddf4-a6f7-4d40-91fb-13d4cd447280">
 
 
 9. Styling the Project
