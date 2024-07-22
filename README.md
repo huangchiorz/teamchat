@@ -44,14 +44,15 @@ Search bar
 List of members with profile pictures and usernames
 Filter options: Online status, Name, Recently joined
 Pagination for member listing
-<img width="1545" alt="image" src="https://github.com/user-attachments/assets/1bd33903-ff74-4ccf-b5f8-8c27df9d2836">
 
+<img width="1468" alt="image" src="https://github.com/user-attachments/assets/cc5af348-ae49-4dc9-841e-13a2705a68f3">
 
 7. Adding Members as Friends
 Member Profile Page:
 "Add Friend" button
 Friend request status: Sent, Accepted, Pending
 Notification system for friend requests
+<img width="1545" alt="image" src="https://github.com/user-attachments/assets/1bd33903-ff74-4ccf-b5f8-8c27df9d2836">
 
 
 8. Public and Private Messaging between Members
