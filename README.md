@@ -44,6 +44,8 @@ Search bar
 List of members with profile pictures and usernames
 Filter options: Online status, Name, Recently joined
 Pagination for member listing
+<img width="1545" alt="image" src="https://github.com/user-attachments/assets/1bd33903-ff74-4ccf-b5f8-8c27df9d2836">
+
 
 7. Adding Members as Friends
 Member Profile Page:
