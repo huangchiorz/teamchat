@@ -26,31 +26,128 @@
         }
 
         .sidebar {
-            width: 25%;
+            width: 30%;
             padding: 20px;
             background-color: #fff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 5px;
+            display: flex;
+            flex-direction: column;
             margin-right: 20px;
+        }
+
+        .search-container, .new-group-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .search-container input {
+            flex: 1;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .search-container button, .new-group-container button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .search-container button:hover, .new-group-container button:hover {
+            background-color: #0056b3;
+        }
+
+        .friends-list, .group-list {
+            flex: 1;
+            margin-bottom: 20px;
             overflow-y: auto;
         }
 
-        .sidebar h3 {
+        .friends-list h3, .group-list h3 {
             margin-top: 0;
         }
 
-        .sidebar .friend {
+        .friend, .group {
             padding: 10px;
             border-bottom: 1px solid #ddd;
             cursor: pointer;
         }
 
-        .sidebar .friend:hover {
+        .friend:hover, .group:hover {
             background-color: #f0f0f0;
         }
 
-        .friend:last-child {
+        .friend:last-child, .group:last-child {
             border-bottom: none;
+        }
+
+        .conversation-thread {
+            flex: 1;
+            padding: 15px;
+            background-color: #f7f7f7;
+            border-radius: 5px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+        }
+
+        .message {
+            margin-bottom: 15px;
+        }
+
+        .message p {
+            margin: 0;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            max-width: 70%;
+        }
+
+        .message.sent p {
+            background-color: #dcf8c6;
+            margin-left: auto;
+        }
+
+        .message.received p {
+            background-color: #e0e0e0;
+        }
+
+        .message-input-container {
+            display: flex;
+            align-items: center;
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+            margin-top: 10px;
+        }
+
+        .message-input-container input {
+            flex: 1;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .message-input-container button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .message-input-container button:hover {
+            background-color: #0056b3;
         }
 
         .content {
@@ -108,68 +205,6 @@
             text-align: right;
         }
 
-        .conversation-thread {
-            flex: 1;
-            margin-bottom: 20px;
-            padding: 15px;
-            background-color: #f7f7f7;
-            border-radius: 5px;
-            overflow-y: auto;
-            border: 1px solid #ddd;
-        }
-
-        .message {
-            margin-bottom: 15px;
-        }
-
-        .message p {
-            margin: 0;
-            padding: 10px;
-            background-color: #fff;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-            max-width: 70%;
-        }
-
-        .message.sent p {
-            background-color: #dcf8c6;
-            margin-left: auto;
-        }
-
-        .message.received p {
-            background-color: #e0e0e0;
-        }
-
-        .message-input-container {
-            display: flex;
-            align-items: center;
-            border-top: 1px solid #ddd;
-            padding-top: 10px;
-            margin-top: 10px;
-        }
-
-        .message-input-container input {
-            flex: 1;
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            margin-right: 10px;
-        }
-
-        .message-input-container button {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .message-input-container button:hover {
-            background-color: #0056b3;
-        }
-
         .back-to-dashboard {
             position: absolute;
             top: 20px;
@@ -187,38 +222,25 @@
 <body>
     <a href="/social_network/dashboard.html" class="back-to-dashboard">Back to Dashboard</a>
     <div class="container">
-        <!-- Left Sidebar: Friends List -->
+        <!-- Left Sidebar: Friends List and Selected Conversation -->
         <div class="sidebar">
-            <h3>Your Friends</h3>
-            <div class="friend" onclick="selectConversation('Michael Brown')">
-                <span>Michael Brown</span>
+            <div class="search-container">
+                <input type="text" placeholder="Search users...">
+                <button>Search</button>
             </div>
-            <div class="friend" onclick="selectConversation('Emily Clark')">
-                <span>Emily Clark</span>
-            </div>
-            <div class="friend" onclick="selectConversation('Linda Johnson')">
-                <span>Linda Johnson</span>
-            </div>
-            <!-- Add more friends as needed -->
-        </div>
 
-        <!-- Right Content: Conversation History and Thread -->
-        <div class="content">
-            <h3>Conversation History</h3>
-            <div class="conversation-list">
-                <div class="conversation unread" onclick="selectConversation('Michael Brown')">
-                    <p><strong>Michael Brown:</strong> Are you coming to the meeting tomorrow?</p>
-                    <p class="time">10:45 AM</p>
+            <div class="friends-list">
+                <h3>Your Friends</h3>
+                <div class="friend" onclick="selectConversation('Michael Brown')">
+                    <span>Michael Brown</span>
                 </div>
-                <div class="conversation" onclick="selectConversation('Emily Clark')">
-                    <p><strong>Emily Clark:</strong> Thank you for the help earlier!</p>
-                    <p class="time">Yesterday, 3:15 PM</p>
+                <div class="friend" onclick="selectConversation('Emily Clark')">
+                    <span>Emily Clark</span>
                 </div>
-                <div class="conversation unread" onclick="selectConversation('Linda Johnson')">
-                    <p><strong>Linda Johnson:</strong> Can we reschedule our call?</p>
-                    <p class="time">Yesterday, 11:30 AM</p>
+                <div class="friend" onclick="selectConversation('Linda Johnson')">
+                    <span>Linda Johnson</span>
                 </div>
-                <!-- Add more conversations as needed -->
+                <!-- Add more friends as needed -->
             </div>
 
             <!-- Selected Conversation Thread -->
@@ -236,6 +258,47 @@
             <div class="message-input-container">
                 <input type="text" placeholder="Type your message..." id="message-input">
                 <button onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+
+        <!-- Right Content: Group Discussions -->
+        <div class="content">
+            <div class="new-group-container">
+                <h3>Group Discussions</h3>
+                <button onclick="createGroup()">New Group</button>
+            </div>
+
+            <div class="conversation-list">
+                <div class="conversation" onclick="selectGroupConversation('Project Team')">
+                    <p><strong>Project Team:</strong> Let's finalize the design by tomorrow.</p>
+                    <p class="time">10:30 AM</p>
+                </div>
+                <div class="conversation" onclick="selectGroupConversation('Development Team')">
+                    <p><strong>Development Team:</strong> We need to update the sprint backlog.</p>
+                    <p class="time">Yesterday, 2:00 PM</p>
+                </div>
+                <div class="conversation" onclick="selectGroupConversation('Marketing Team')">
+                    <p><strong>Marketing Team:</strong> The campaign launch is scheduled for next week.</p>
+                    <p class="time">Yesterday, 9:00 AM</p>
+                </div>
+                <!-- Add more group conversations as needed -->
+            </div>
+
+            <!-- Selected Group Conversation Thread -->
+            <div class="conversation-thread" id="group-conversation-thread">
+                <div class="message received">
+                    <p>Project Team: Let's finalize the design by tomorrow.</p>
+                </div>
+                <div class="message sent">
+                    <p>I'll review it today.</p>
+                </div>
+                <!-- More group messages will be appended dynamically -->
+            </div>
+
+            <!-- Group Message Input -->
+            <div class="message-input-container">
+                <input type="text" placeholder="Type your message..." id="group-message-input">
+                <button onclick="sendGroupMessage()">Send</button>
             </div>
         </div>
     </div>
@@ -266,6 +329,38 @@
 
             // Clear the input
             messageInput.value = '';
+        }
+
+        function selectGroupConversation(groupName) {
+            // Example: load conversation for the selected group
+            document.getElementById('group-conversation-thread').innerHTML = `
+                <div class="message received">
+                    <p>${groupName}: This is an example of a conversation in the ${groupName}.</p>
+                </div>
+            `;
+        }
+
+        function sendGroupMessage() {
+            const messageInput = document.getElementById('group-message-input');
+            const message = messageInput.value;
+            if (message.trim() === '') return;
+
+            const groupConversationThread = document.getElementById('group-conversation-thread');
+            const newMessage = document.createElement('div');
+            newMessage.classList.add('message', 'sent');
+            newMessage.innerHTML = `<p>${message}</p>`;
+            groupConversationThread.appendChild(newMessage);
+
+            // Scroll to the bottom of the group conversation thread
+            groupConversationThread.scrollTop = groupConversationThread.scrollHeight;
+
+            // Clear the input
+            messageInput.value = '';
+        }
+
+        function createGroup() {
+            alert("New group creation functionality would be implemented here.");
+            // Implement the group creation logic here
         }
     </script>
 </body>
