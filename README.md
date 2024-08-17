@@ -33,9 +33,11 @@ Confirmation dialog on click
 
 
 5. DashBoard
+work calendar on the top, and add and modify the meeting with adding groups and individules.
 Directories to all the major function pages:
 profile, member directory, messaging, friend requests, logout.
-![image](https://github.com/user-attachments/assets/c36a562e-079f-4fdd-b2cb-a118b725bbca)
+![image](https://github.com/user-attachments/assets/8ecfd8e8-3428-441b-a059-585a24bf3a6f)
+
 
 
 6. User Profiles with Uploaded Thumbnails
