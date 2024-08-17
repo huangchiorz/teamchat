@@ -38,7 +38,7 @@ profile, member directory, messaging, friend requests, logout.
 ![image](https://github.com/user-attachments/assets/c36a562e-079f-4fdd-b2cb-a118b725bbca)
 
 
-7. User Profiles with Uploaded Thumbnails
+6. User Profiles with Uploaded Thumbnails
 User Profile Page:
 Display: Profile picture (thumbnail), Username, birthday, department, position, Bio, Status, Contact information
 Edit Profile button
@@ -49,7 +49,7 @@ Option to change profile picture
 
 
 
-8. Member Directory
+7. Member Directory
 Member Directory Page:
 Search bar
 List of members with profile pictures and usernames
@@ -59,13 +59,6 @@ Pagination for member listing
 ![image](https://github.com/user-attachments/assets/82f7d519-5486-41e3-9205-210bba1681c3)
 
 
-7. Adding Members as Friends
-Member Profile Page:
-"Add Friend" button
-Friend request status: Sent, Accepted, Pending
-Notification system for friend requests
-<img width="1545" alt="image" src="https://github.com/user-attachments/assets/1bd33903-ff74-4ccf-b5f8-8c27df9d2836">
-
 
 8. Public and Private Messaging between Members
 Messaging Interface:
@@ -74,7 +67,8 @@ Chat window with message threads
 Text input for new messages
 Attachments support (images, files)
 Read receipts
-<img width="1472" alt="image" src="https://github.com/user-attachments/assets/ccb4ddf4-a6f7-4d40-91fb-13d4cd447280">
+![image](https://github.com/user-attachments/assets/d431496a-cdbe-4768-80ca-041639c4e874)
+
 
 
 9. Styling the Project
