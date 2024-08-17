@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+    <!-- FullCalendar CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.css" rel="stylesheet">
     <style>
         * {
             box-sizing: border-box;
@@ -17,7 +19,7 @@
         }
 
         .dashboard-container {
-            width: 800px;
+            width: 1000px;
             margin: 50px auto;
             padding: 20px;
             background-color: #fff;
@@ -30,52 +32,153 @@
             margin-bottom: 20px;
         }
 
-        .dashboard-section {
-            margin-bottom: 20px;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            background-color: #f9f9f9;
+        #calendar {
+            max-width: 900px;
+            margin: 0 auto 20px auto;
         }
 
-        .dashboard-section h3 {
+        .meeting-details {
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: #f1f1f1;
+        }
+
+        .meeting-details h3 {
             margin-top: 0;
         }
 
-        .dashboard-link {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 4px;
-            transition: background-color 0.3s;
+        .meeting {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .dashboard-link:hover {
+        .meeting button {
+            margin-left: 10px;
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .meeting button:hover {
             background-color: #0056b3;
         }
 
-        p {
-            text-align: center;
+        .participants {
+            margin-top: 20px;
         }
 
-        a {
-            color: #007bff;
-            text-decoration: none;
+        .participants h4 {
+            margin-top: 0;
         }
 
-        a:hover {
-            text-decoration: underline;
+        .participant-list {
+            margin-bottom: 10px;
         }
+
+        .participant {
+            margin-bottom: 5px;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .participant button {
+            margin-left: 10px;
+            padding: 5px 10px;
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .participant button:hover {
+            background-color: #c82333;
+        }
+
+        .add-participants {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .add-participants button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .add-participants button:hover {
+            background-color: #218838;
+        }
+
     </style>
 </head>
 <body>
     <div class="dashboard-container">
         <h2>Dashboard</h2>
-        <p>Welcome to your dashboard! Use the links below to navigate through the various features of the app.</p>
-        
+
+        <!-- FullCalendar -->
+        <div id="calendar"></div>
+
+        <!-- Meeting Details for the Day -->
+        <div class="meeting-details">
+            <h3>Today's Meetings</h3>
+            <div id="meetings-list">
+                <!-- Example Meeting -->
+                <div class="meeting">
+                    <span>Project Meeting at 10:00 AM</span>
+                    <div>
+                        <button onclick="modifyMeeting()">Modify</button>
+                        <button onclick="deleteMeeting()">Delete</button>
+                    </div>
+                </div>
+                <!-- More meetings will be dynamically inserted here -->
+            </div>
+
+            <!-- Participants Section -->
+            <div class="participants">
+                <h4>Participants</h4>
+                <div id="participant-list">
+                    <!-- Example Participants -->
+                    <div class="participant">
+                        <span>John Doe</span>
+                        <button onclick="removeParticipant(this)">Remove</button>
+                    </div>
+                    <div class="participant">
+                        <span>Jane Smith</span>
+                        <button onclick="removeParticipant(this)">Remove</button>
+                    </div>
+                    <!-- More participants will be dynamically inserted here -->
+                </div>
+
+                <!-- Add Participants or Group Buttons -->
+                <div class="add-participants">
+                    <button onclick="addParticipant()">Add Person</button>
+                    <button onclick="addGroup()">Add Group</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Links -->
         <div class="dashboard-section">
             <h3>Profile</h3>
             <p>Manage your profile, update your bio, and change your profile picture.</p>
@@ -93,7 +196,6 @@
             <p>Send and receive messages with other members.</p>
             <a href="/social_network/messaging.html" class="dashboard-link">Open Messaging</a>
         </div>
-        
 
         <div class="dashboard-section">
             <h3>Logout</h3>
@@ -101,5 +203,90 @@
             <a href="/social_network/logout.html" class="dashboard-link">Logout</a>
         </div>
     </div>
+
+    <!-- FullCalendar JS -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth', // Default view is month
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
+                selectable: true,
+                selectHelper: true,
+                select: function(info) {
+                    var title = prompt('Enter Event Title:');
+                    if (title) {
+                        calendar.addEvent({
+                            title: title,
+                            start: info.start,
+                            end: info.end,
+                            allDay: info.allDay
+                        });
+                    }
+                    calendar.unselect();
+                },
+                events: [
+                    {
+                        title: 'Project Meeting',
+                        start: new Date().toISOString().slice(0, 10) + 'T10:00:00',
+                        end: new Date().toISOString().slice(0, 10) + 'T11:00:00'
+                    },
+                    // More events can be added here
+                ],
+                eventClick: function(info) {
+                    // Display event details in the meeting details section
+                    document.getElementById('meetings-list').innerHTML = `
+                        <div class="meeting">
+                            <span>${info.event.title} at ${info.event.start.toLocaleTimeString()}</span>
+                            <div>
+                                <button onclick="modifyMeeting()">Modify</button>
+                                <button onclick="deleteMeeting()">Delete</button>
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+
+            calendar.render();
+        });
+
+        function modifyMeeting() {
+            alert('Modify meeting functionality to be implemented.');
+        }
+
+        function deleteMeeting() {
+            alert('Delete meeting functionality to be implemented.');
+        }
+
+        function addParticipant() {
+            const participantName = prompt('Enter the name of the participant:');
+            if (participantName) {
+                const participantList = document.getElementById('participant-list');
+                const newParticipant = document.createElement('div');
+                newParticipant.classList.add('participant');
+                newParticipant.innerHTML = `
+                    <span>${participantName}</span>
+                    <button onclick="removeParticipant(this)">Remove</button>
+                `;
+                participantList.appendChild(newParticipant);
+            }
+        }
+
+        function addGroup() {
+            alert('Add group functionality to be implemented.');
+            // Implement the group adding logic here
+        }
+
+        function removeParticipant(button) {
+            const participant = button.parentElement;
+            participant.remove();
+        }
+    </script>
 </body>
 </html>
