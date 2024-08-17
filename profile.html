@@ -4,25 +4,217 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .profile-container {
+            width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            text-align: center;
+            position: relative;
+        }
+
+        .profile-container img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            margin-bottom: 10px;
+        }
+
+        .profile-info {
+            margin-bottom: 15px;
+            text-align: left;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .profile-info label {
+            font-weight: bold;
+            display: inline-block;
+            width: 100px;
+        }
+
+        .profile-info p {
+            display: inline-block;
+            margin: 0;
+            font-size: 16px;
+            flex: 1;
+        }
+
+        .profile-info input {
+            display: none;
+            width: calc(100% - 120px);
+            padding: 5px;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+
+        .edit-btn, .save-btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 5px 10px;
+            margin-left: 10px;
+        }
+
+        .save-btn {
+            background-color: #28a745;
+        }
+
+        .edit-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .save-btn:hover {
+            background-color: #218838;
+        }
+
+        .bio, .status {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .bio label, .status label {
+            font-weight: bold;
+            display: block;
+        }
+
+        .bio p, .status p {
+            margin: 0;
+            font-size: 16px;
+        }
+
+        .contact-info {
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .contact-info label {
+            font-weight: bold;
+            display: inline-block;
+            width: 100px;
+        }
+
+        .contact-info p {
+            display: inline-block;
+            margin: 0;
+            font-size: 16px;
+            flex: 1;
+        }
+
+        .back-to-dashboard {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        .back-to-dashboard:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    <div class="container profile-container">
-        <div class="profile-header">
-            <img src="profile-pic.jpg" alt="Profile Picture" class="profile-pic">
-            <h2>Username</h2>
-            <p>Bio: This is a sample bio.</p>
-            <button>Edit Profile</button>
+    <div class="profile-container">
+        <a href="/social_network/dashboard.html" class="back-to-dashboard">Back to Dashboard</a>
+        <img src="/social_network/profile.jpg" alt="User Avatar">
+        <h2 id="user-name">John Doe</h2>
+
+        <div class="profile-info">
+            <label>Birthday:</label>
+            <p id="birthday-text">January 1, 1990</p>
+            <input type="text" id="birthday-input" value="January 1, 1990">
+            <button class="edit-btn" onclick="editField('birthday')">Edit</button>
+            <button class="save-btn" onclick="saveField('birthday')" style="display:none;">Save</button>
         </div>
-        <div class="profile-gallery">
-            <h3>Gallery</h3>
-            <div class="gallery-grid">
-                <img src="gallery-img1.jpg" alt="Gallery Image 1">
-                <img src="gallery-img2.jpg" alt="Gallery Image 2">
-                <img src="gallery-img3.jpg" alt="Gallery Image 3">
-                <img src="gallery-img4.jpg" alt="Gallery Image 4">
-            </div>
+
+        <div class="profile-info">
+            <label>Department:</label>
+            <p id="department-text">Engineering</p>
+            <input type="text" id="department-input" value="Engineering">
+            <button class="edit-btn" onclick="editField('department')">Edit</button>
+            <button class="save-btn" onclick="saveField('department')" style="display:none;">Save</button>
+        </div>
+
+        <div class="profile-info">
+            <label>Position:</label>
+            <p id="position-text">Software Engineer</p>
+            <input type="text" id="position-input" value="Software Engineer">
+            <button class="edit-btn" onclick="editField('position')">Edit</button>
+            <button class="save-btn" onclick="saveField('position')" style="display:none;">Save</button>
+        </div>
+
+        <div class="bio">
+            <label>Bio:</label>
+            <p id="bio-text">Passionate developer with a love for creating impactful software solutions. Enjoys working in a collaborative environment and constantly learning new technologies.</p>
+            <input type="text" id="bio-input" value="Passionate developer with a love for creating impactful software solutions. Enjoys working in a collaborative environment and constantly learning new technologies.">
+            <button class="edit-btn" onclick="editField('bio')">Edit</button>
+            <button class="save-btn" onclick="saveField('bio')" style="display:none;">Save</button>
+        </div>
+
+        <div class="status">
+            <label>Status:</label>
+            <p id="status-text">Online</p>
+            <input type="text" id="status-input" value="Online">
+            <button class="edit-btn" onclick="editField('status')">Edit</button>
+            <button class="save-btn" onclick="saveField('status')" style="display:none;">Save</button>
+        </div>
+
+        <div class="contact-info">
+            <label>Phone:</label>
+            <p id="phone-text">(123) 456-7890</p>
+            <input type="text" id="phone-input" value="(123) 456-7890">
+            <button class="edit-btn" onclick="editField('phone')">Edit</button>
+            <button class="save-btn" onclick="saveField('phone')" style="display:none;">Save</button>
+        </div>
+
+        <div class="contact-info">
+            <label>Email:</label>
+            <p id="email-text">john.doe@example.com</p>
+            <input type="text" id="email-input" value="john.doe@example.com">
+            <button class="edit-btn" onclick="editField('email')">Edit</button>
+            <button class="save-btn" onclick="saveField('email')" style="display:none;">Save</button>
         </div>
     </div>
+
+    <script>
+        function editField(field) {
+            document.getElementById(`${field}-text`).style.display = 'none';
+            document.getElementById(`${field}-input`).style.display = 'inline-block';
+            document.querySelector(`.${field}-edit-btn`).style.display = 'none';
+            document.querySelector(`.${field}-save-btn`).style.display = 'inline-block';
+        }
+
+        function saveField(field) {
+            const inputValue = document.getElementById(`${field}-input`).value;
+            document.getElementById(`${field}-text`).textContent = inputValue;
+            document.getElementById(`${field}-text`).style.display = 'inline-block';
+            document.getElementById(`${field}-input`).style.display = 'none';
+            document.querySelector(`.${field}-save-btn`).style.display = 'none';
+            document.querySelector(`.${field}-edit-btn`).style.display = 'inline-block';
+        }
+    </script>
 </body>
 </html>
