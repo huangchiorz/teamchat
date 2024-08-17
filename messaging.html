@@ -3,50 +3,270 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Messaging Interface</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Messaging</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            flex: 1;
+            padding: 20px;
+        }
+
+        .sidebar {
+            width: 25%;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            margin-right: 20px;
+            overflow-y: auto;
+        }
+
+        .sidebar h3 {
+            margin-top: 0;
+        }
+
+        .sidebar .friend {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+        }
+
+        .sidebar .friend:hover {
+            background-color: #f0f0f0;
+        }
+
+        .friend:last-child {
+            border-bottom: none;
+        }
+
+        .content {
+            flex: 1;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .content h3 {
+            margin-top: 0;
+        }
+
+        .conversation-list {
+            flex: 1;
+            margin-bottom: 20px;
+            overflow-y: auto;
+        }
+
+        .conversation {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+        }
+
+        .conversation:last-child {
+            border-bottom: none;
+        }
+
+        .conversation.unread {
+            background-color: #ffefef;
+        }
+
+        .conversation.unread:hover {
+            background-color: #ffdede;
+        }
+
+        .conversation:hover {
+            background-color: #f9f9f9;
+        }
+
+        .conversation p {
+            margin: 0;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .conversation .time {
+            font-size: 12px;
+            color: #888;
+            text-align: right;
+        }
+
+        .conversation-thread {
+            flex: 1;
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f7f7f7;
+            border-radius: 5px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+        }
+
+        .message {
+            margin-bottom: 15px;
+        }
+
+        .message p {
+            margin: 0;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            max-width: 70%;
+        }
+
+        .message.sent p {
+            background-color: #dcf8c6;
+            margin-left: auto;
+        }
+
+        .message.received p {
+            background-color: #e0e0e0;
+        }
+
+        .message-input-container {
+            display: flex;
+            align-items: center;
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+            margin-top: 10px;
+        }
+
+        .message-input-container input {
+            flex: 1;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .message-input-container button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .message-input-container button:hover {
+            background-color: #0056b3;
+        }
+
+        .back-to-dashboard {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        .back-to-dashboard:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
+    <a href="/social_network/dashboard.html" class="back-to-dashboard">Back to Dashboard</a>
     <div class="container">
-        <h2>Messages</h2>
-        <div class="message-list">
-            <div class="message-preview">
-                <img src="user1.jpg" alt="User 1" class="user-pic">
-                <div class="message-info">
-                    <p class="user-name">User 1</p>
-                    <p class="message-text">Hey, how are you?</p>
-                </div>
+        <!-- Left Sidebar: Friends List -->
+        <div class="sidebar">
+            <h3>Your Friends</h3>
+            <div class="friend" onclick="selectConversation('Michael Brown')">
+                <span>Michael Brown</span>
             </div>
-            <div class="message-preview">
-                <img src="user2.jpg" alt="User 2" class="user-pic">
-                <div class="message-info">
-                    <p class="user-name">User 2</p>
-                    <p class="message-text">Let's catch up soon!</p>
-                </div>
+            <div class="friend" onclick="selectConversation('Emily Clark')">
+                <span>Emily Clark</span>
             </div>
-            <!-- Repeat message-preview for more messages -->
+            <div class="friend" onclick="selectConversation('Linda Johnson')">
+                <span>Linda Johnson</span>
+            </div>
+            <!-- Add more friends as needed -->
         </div>
-        <div class="chat-window">
-            <div class="chat-header">
-                <img src="user1.jpg" alt="User 1" class="user-pic">
-                <p class="user-name">User 1</p>
-            </div>
-            <div class="chat-messages">
-                <div class="message">
-                    <p class="message-sender">User 1:</p>
-                    <p class="message-text">Hey, how are you?</p>
+
+        <!-- Right Content: Conversation History and Thread -->
+        <div class="content">
+            <h3>Conversation History</h3>
+            <div class="conversation-list">
+                <div class="conversation unread" onclick="selectConversation('Michael Brown')">
+                    <p><strong>Michael Brown:</strong> Are you coming to the meeting tomorrow?</p>
+                    <p class="time">10:45 AM</p>
                 </div>
-                <div class="message">
-                    <p class="message-sender">You:</p>
-                    <p class="message-text">I'm good, thanks! How about you?</p>
+                <div class="conversation" onclick="selectConversation('Emily Clark')">
+                    <p><strong>Emily Clark:</strong> Thank you for the help earlier!</p>
+                    <p class="time">Yesterday, 3:15 PM</p>
                 </div>
-                <!-- Repeat message for more chat messages -->
+                <div class="conversation unread" onclick="selectConversation('Linda Johnson')">
+                    <p><strong>Linda Johnson:</strong> Can we reschedule our call?</p>
+                    <p class="time">Yesterday, 11:30 AM</p>
+                </div>
+                <!-- Add more conversations as needed -->
             </div>
-            <div class="message-input">
-                <input type="text" placeholder="Type a message...">
-                <button>Send</button>
+
+            <!-- Selected Conversation Thread -->
+            <div class="conversation-thread" id="conversation-thread">
+                <div class="message received">
+                    <p>Michael Brown: Are you coming to the meeting tomorrow?</p>
+                </div>
+                <div class="message sent">
+                    <p>Yes, I'll be there!</p>
+                </div>
+                <!-- More messages will be appended dynamically -->
+            </div>
+
+            <!-- Message Input -->
+            <div class="message-input-container">
+                <input type="text" placeholder="Type your message..." id="message-input">
+                <button onclick="sendMessage()">Send</button>
             </div>
         </div>
     </div>
+
+    <script>
+        function selectConversation(friendName) {
+            // Example: load conversation for the selected friend
+            document.getElementById('conversation-thread').innerHTML = `
+                <div class="message received">
+                    <p>${friendName}: This is an example of a conversation with ${friendName}.</p>
+                </div>
+            `;
+        }
+
+        function sendMessage() {
+            const messageInput = document.getElementById('message-input');
+            const message = messageInput.value;
+            if (message.trim() === '') return;
+
+            const conversationThread = document.getElementById('conversation-thread');
+            const newMessage = document.createElement('div');
+            newMessage.classList.add('message', 'sent');
+            newMessage.innerHTML = `<p>${message}</p>`;
+            conversationThread.appendChild(newMessage);
+
+            // Scroll to the bottom of the conversation thread
+            conversationThread.scrollTop = conversationThread.scrollHeight;
+
+            // Clear the input
+            messageInput.value = '';
+        }
+    </script>
 </body>
 </html>
