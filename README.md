@@ -62,16 +62,17 @@ Pagination for member listing
 
 8. Public and Private Messaging between Members
 Messaging Interface:
-Inbox and Sent messages
+personal message at the left side box.
+group message at the right side box.
 Chat window with message threads
 Text input for new messages
-Attachments support (images, files)
-Read receipts
-![image](https://github.com/user-attachments/assets/d431496a-cdbe-4768-80ca-041639c4e874)
+
+![image](https://github.com/user-attachments/assets/c0117305-e6c3-4b48-b75b-222159ead0de)
 
 
 
-9. Styling the Project
+
+10. Styling the Project
 General Styling:
 Consistent color scheme
 Responsive design for different screen sizes
