@@ -28,24 +28,28 @@ Link to Signup page
 3. Logout Facility
 Logout Button:
 Typically placed in the header or user profile menu
-Confirmation dialog on click (optional)
+Confirmation dialog on click 
+<img width="315" alt="image" src="https://github.com/user-attachments/assets/8cd38c4e-b1f1-4502-9407-60eb21492bc1">
 
-4. Session Control
-Session Management:
-Auto-logout after a period of inactivity
-Notification before session expiry with option to extend
-Token-based authentication
 
-5. User Profiles with Uploaded Thumbnails
+5. DashBoard
+Directories to all the major function pages:
+profile, member directory, messaging, friend requests, logout.
+![image](https://github.com/user-attachments/assets/c36a562e-079f-4fdd-b2cb-a118b725bbca)
+
+
+7. User Profiles with Uploaded Thumbnails
 User Profile Page:
-Display: Profile picture (thumbnail), Username, Bio, Contact information
+Display: Profile picture (thumbnail), Username, birthday, department, position, Bio, Status, Contact information
 Edit Profile button
 Gallery for uploaded pictures
 Option to change profile picture
-<img width="1495" alt="image" src="https://github.com/user-attachments/assets/168e0d44-3d07-4073-94bc-071caa310963">
+![image](https://github.com/user-attachments/assets/909bb2de-1b61-48d5-8e93-88f4e680bb86)
 
 
-6. Member Directory
+
+
+8. Member Directory
 Member Directory Page:
 Search bar
 List of members with profile pictures and usernames
